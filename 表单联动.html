@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin:10px;
+        }
+        .part3{
+            display:none;
+        }
+        .part2{
+            display:block;
+        }
+        select{
+            width:100px;
+            height:40px;
+            border-radius:10px;
+        }
+    </style>
+</head>
+<body>
+<div class="part1">
+    <input type="radio" class="rads" id="rads" name="rad" checked>
+    <label for="rads">在校生</label>
+    <input type="radio" class="radn" id="radn" name="rad">
+    <label for="radn">非在校生</label>
+</div>
+<div class="part2">
+    <label for="city">学校</label>
+    <select name="city" id="city">
+        <option value="北京">北京</option>
+        <option value="广州">广州</option>
+        <option value="湖北">湖北</option>
+        <option value="上海">上海</option>
+        <option value="浙江">浙江</option>
+    </select>
+    <select name="school" id="school">
+        <option value="北京大学">北京大学</option>
+        <option value="清华大学">清华大学</option>
+    </select>
+</div>
+<div class="part3">
+    <label for="txt">就业单位</label>
+    <input type="text" id="txt">
+</div>
+<script>
+    var rads=document.getElementById("rads");
+    var radn=document.getElementById("radn");
+    var city=document.getElementById("city");
+    var school=document.getElementById("school");
+    var part2=document.getElementsByClassName("part2");
+    var part3=document.getElementsByClassName("part3");
+
+
+    rads.onchange=function(){
+        part2[0].style.display="block";
+        part3[0].style.display="none";
+    }
+    radn.onchange=function(){
+        part2[0].style.display="none";
+        part3[0].style.display="block";
+    }
+    var city_school={
+        北京: ["北京的大学", "北京水产大学", "北京国土大学"],
+        上海: ["上海大学", "上海家里蹲大学", "上海复旦大学"],
+        广州: ["广州理工大学", "广州大学", "广州傻傻大学"],
+        湖北: ["武汉大学","华中科技大学","华中农业大学"],
+        浙江: ["浙江大学","浙江师范大学"]
+    }
+    city.onchange=function(){
+        school.innerHTML=""
+        var selected=city.options[city.selectedIndex].value;
+        for(var i=0;i<city_school[selected].length;i++){
+            var opt=document.createElement("option");
+            opt.value=city_school[selected][i];
+            opt.innerHTML=city_school[selected][i];
+            school.appendChild(opt);
+        }
+    }
+
+</script>
+</body>
+</html>

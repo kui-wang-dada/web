@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .content{
+            text-align:center;
+        }
+
+        #tablehead{
+            margin:0 auto;
+            border:none;
+            border-collapse:collapse;
+        }
+        #tableleft{
+            position:absolute;
+            margin-left:calc(50% - 320px);
+            border-collapse:collapse;
+        }
+        #tableleft td,#tablehead td{
+            width:50px;
+            height:50px;
+        }
+        #table{
+            margin:0 auto;
+            border:solid 3px black;
+            border-collapse:collapse;
+        }
+        #table td{
+            transition:all 1s;
+            height:50px;
+            width:50px;
+            border:solid 1px #676767;
+            padding:0;
+        }
+        .pointred{
+            transition:all 1s;
+            background-color:#ff0000;
+        }
+        #pointblue{
+            transition:all 1s;
+            background-color:blue;
+            position:absolute;
+            margin-top:-25px;
+            width:50px;
+            height:15px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="content">
+    <table id="tablehead">
+        <thead>
+        <td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td>
+        </thead>
+    </table>
+    <table id="tableleft">
+        <tr><td>1</td></tr>
+        <tr><td>2</td></tr>
+        <tr><td>3</td></tr>
+        <tr><td>4</td></tr>
+        <tr><td>5</td></tr>
+        <tr><td>6</td></tr>
+        <tr><td>7</td></tr>
+        <tr><td>8</td></tr>
+        <tr><td>9</td></tr>
+        <tr><td>10</td></tr>
+    </table>
+    <table id="table">
+        <tbody id="tbody"></tbody>
+    </table>
+    <div id="bts">
+        <button id="start">开始</button>
+        <button id="go">前进</button>
+        <button id="left">左转</button>
+        <button id="right">右转</button>
+        <button id="back">回头</button>
+    </div>
+</div>
+<script>
+    var tbody=document.getElementById("tbody");
+    var start=document.getElementById("start");
+    var go=document.getElementById("go");
+    var left=document.getElementById("left");
+    var right=document.getElementById("right");
+    var back=document.getElementById("back");
+
+
+    function init(){
+        to="top";
+        tbody.innerHTML="";
+        for(var i=1;i<11;i++){
+            var rr=document.createElement("tr");
+
+            for(j=1;j<11;j++){
+                var dd=document.createElement("td");
+                dd.id="td"+i+j;
+                dd.innerHTML="";
+                rr.appendChild(dd);
+            }
+            tbody.appendChild(rr);
+        }
+    }
+    init();
+
+    start.onclick=function(){
+        var point=document.getElementById("td55");
+        point.className="pointred";
+        var str="<div id='pointblue'></div>";
+        point.innerHTML=str;
+    }
+
+    go.onclick=function(){
+        var pointblue=document.getElementById("pointblue");
+        var row=0;
+        var col=0;
+        var address=pointblue.parentNode.id.substring(2);
+        if(address.length==4){
+            row=10;
+            col=10;
+        }else if(address.length==3){
+            if(address[0]==1&&address[1]==1){
+                row=1;
+                col=10;
+            }else if(address[0]==1&&address[1]==0){
+                row=10;
+                col=address[2];
+            }else {
+                row=address[0];
+                col=10;
+            }
+        }else{
+            row=address[0];
+            col=address[1];
+        }
+        if(to=="top"){
+            row=row*1;
+            row-=1;
+        }else if(to=="left"){
+            col=col*1;
+            col-=1;
+        }else if(to=="right"){
+            col=col*1;
+            col+=1;
+        }else if(to=="buttom"){
+            row=row*1;
+            row+=1;
+        }
+        var nexpoint=document.getElementById("td"+row+col);
+        nexpoint.className=pointblue.parentNode.className;
+        pointblue.parentNode.className="";
+        nexpoint.innerHTML=pointblue.parentNode.innerHTML;
+        pointblue.parentNode.innerHTML="";
+    }
+
+    left.onclick=function(){
+        var pointblue=document.getElementById("pointblue");
+        if(to=="top"){
+            pointblue.style.width="15px";
+            pointblue.style.height="50px";
+            to="left";
+        }else if(to=="left"){
+            pointblue.style.width="50px";
+            pointblue.style.height="15px";
+            pointblue.style.marginTop="10px";
+            to="buttom";
+        }
+        else if(to=="buttom"){
+            pointblue.style.width="15px";
+            pointblue.style.height="50px";
+            pointblue.style.marginLeft="35px";
+            pointblue.style.marginTop="-25px";
+            to="right";
+        }else if(to=="right"){
+            pointblue.style.width="50px";
+            pointblue.style.height="15px";
+            pointblue.style.marginTop="-25px";
+            pointblue.style.marginLeft="0px";
+            to="top";
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

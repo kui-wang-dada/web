@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        main{
+            position:relative;
+            width:600px;
+            height:400px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            margin:200px auto;
+        }
+        .container{
+            position:relative;
+            width:100%;
+            max-width:800px;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+        .caption{
+            position:absolute;
+            padding:30px;
+            width:60%;
+            height:50%;
+            z-index:1;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+
+        }
+
+        .caption::before {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            height: 0;
+            border: 3px solid #fffffb;
+            border-width: 0 3px;
+            transition: all .5s;
+            visibility: hidden;
+        }
+
+        .caption::after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            width: 0;
+            left: 50%;
+            height: 100%;
+            border: 3px solid #fffffb;
+            border-width: 3px 0;
+            transition: all .5s;
+            visibility: hidden;
+        }
+        .container:hover .caption::after {
+            width: 100%;
+            left: 0;
+            visibility: visible;
+        }
+
+        .container:hover .caption::before {
+            height: 100%;
+            top: 0;
+            visibility: visible;
+        }
+        .container:hover .im{
+            -webkit-filter:blur(5px);
+        }
+
+        .container .caption h1 {
+            margin-bottom: 10px;
+        }
+
+        .container .captiona {
+            position: relative;
+            font-size: 15px;
+            color: #3498db;
+            z-index: 1;
+        }
+
+        .im{
+            width:100%;
+            height:100%;
+            transition:-webkit-filter 2s;
+        }
+
+        h1{
+            background-image:-webkit-linear-gradient(left,#3498db,#f47920 10%,#d71345 20%,#f7acbc 30%,#ffd400 40%,#3498db 50%,#f47920 60%,#d71345 70%,#f7acbc 80%,#ffd400 90%,#3498db);
+            background-size:200%;
+            -webkit-background-clip:text;
+            color:transparent;
+            animation:streamer 3s infinite linear;
+        }
+        a{
+            text-decoration:none;
+            animation:breathe 3s infinite linear;
+        }
+
+        @keyframes streamer {
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: -100% 0;
+            }
+        }
+
+        @keyframes breathe {
+            0% {
+                color: #3498db;
+            }
+
+            25% {
+                color: #d71345;
+            }
+
+            50% {
+                color: #f7acbc;
+            }
+
+            75% {
+                color: #d71345;
+            }
+
+            0% {
+                color: #3498db;
+            }
+        }
+    </style>
+</head>
+<body>
+<main>
+    <div class="container">
+        <div class="caption">
+            <h1>欢迎来到王达的web世界</h1>
+            <a href="https://github.com/wangkui1991" target="_blank">点击进入</a>
+        </div>
+        <div class="im"><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1505212294324&di=fb2f60364ac683c0fa653efd0dd8033f&imgtype=0&src=http%3A%2F%2Fphotocdn.sohu.com%2F20150813%2Fmp27220218_1439447674080_4.png" alt="" height="400" width="600"></div>
+    </div>
+</main>
+</body>
+</html>

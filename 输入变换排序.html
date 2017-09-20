@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #list li{
+            width:50px;
+            background-color:#ff2323;
+            text-align:center;
+            color:#ffffff;
+            font-size:20px;
+            display:inline-block;
+            margin:0 10px;
+            text-decoration:none
+        }
+        #sor{
+            clear:both;
+        }
+    </style>
+</head>
+<body>
+<div id="t1">
+    <input type="text" id="txt">
+    <button id="left">左侧入</button>
+    <button id="right">右侧入</button>
+    <button id="leftout">左侧出</button>
+    <button id="rightout">右侧出</button>
+</div>
+<div id="t2">
+    <ul id="list">
+    </ul>
+    <button id="sor">排序</button>
+</div>
+<script>
+    var wenben=document.getElementById("txt");
+    var leftin=document.getElementById("left");
+    var rightin=document.getElementById("right");
+    var leftout=document.getElementById("leftout");
+    var rightout=document.getElementById("rightout");
+    var list=document.getElementById("list");
+    var sor=document.getElementById("sor");
+
+
+
+    function clickon(idd){
+        var num=wenben.value;
+
+        if(isNaN(num)){
+            alert("请输入数字");
+        }
+        else if(num<0||num>100){
+            alert("数据超出规定范围：0~100");
+        }
+        else{
+            var newli=document.createElement("li");
+
+            newli.style.height=num+"px";
+            newli.style.marginTop=(100-num)+"px";
+
+            newli.onclick=function(){
+                alert(num);
+                this.parentNode.removeChild(this);
+            }
+            if(idd=="left"){
+                list.insertBefore(newli,list.firstChild);
+            }
+            else if(idd="right"){
+                list.appendChild(newli);
+            }
+            else if(idd="leftout"){
+                list.removeChild(list.firstChild);
+            }
+            else if(idd="rightout"){
+                list.removeChild(list.lastChild);
+            }
+        }
+    }
+    leftin.onclick=function(){clickon("left")};
+    rightin.onclick=function(){clickon("right")};
+    leftout.onclick=function(){clickon("leftout")};
+    rightout.onclick=function(){clickon("rightout")};
+
+
+    function maopao(arr){
+        for(var i=0;i<arr.length;i++){
+            for(var j=0;j<arr.length-1;j++){
+                if(arr[j]>arr[j+1]){
+                    var at=arr[j];
+                    arr[j]=arr[j+1];
+                    arr[j+1]=at;
+                }
+            }
+        }
+    }
+
+    function xuanze(arr){
+        for(var i=0;i<arr.length;i++){
+            var min=i;
+            for(var j=i+1;j<arr.length;j++){
+                if(arr[min]>arr[j]){
+                    arr[min]=arr[j];
+                }
+            }
+        }
+    }
+
+    var stste=[];
+    function donghua(){
+        e.preventDefault();
+        var list2=document.getElementsByTagName("li");
+        var i=list2.length;
+        var cc;
+        while(i>0){
+            for(var j=0;j<i-1;j++){
+                if(list2[j].style.height>list2[j+1].style.height){
+                    cc=list2[j].style.height;
+                    list2[j].style.height=list2[j+1].style.height
+                    list2[j+1].style.height=cc;
+                }
+                state.push(JSON.parse(JSON.stringify(list2)));
+            }
+            i--;
+        }
+    }
+
+
+    sor.onclick=function(e){
+        e.preventDefault();
+        var list2=document.getElementsByTagName("li");
+        var i=list2.length;
+        var cc;
+        while(i>0){
+            for(var j=0;j<i-1;j++){
+                if(list2[j].style.height>list2[j+1].style.height){
+                    cc=list2[j].style.height;
+                    list2[j].style.height=list2[j+1].style.height
+                    list2[j+1].style.height=cc;
+                }
+            }
+            i--;
+        }
+        sortAnimation(donghua,state);
+    }
+
+
+</script>
+</body>
+</html>

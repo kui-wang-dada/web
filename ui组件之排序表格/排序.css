@@ -1,0 +1,23 @@
+#part1{
+    position:fixed;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    margin:auto;
+    background:#ddd;
+    width:60%;
+}
+#table{
+    margin:auto;
+    text-align:center;
+}
+#head{
+    background:#aaa;
+}
+td{
+    height:40px;
+    width:100px;
+    border-collaspe:collaspe;
+    border:1px solid #333;
+}

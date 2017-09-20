@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #part1{
+            text-align:center;
+        }
+        #tk{
+            height:50px;
+            width:200px;
+        }
+        #part2{
+            display:none;
+            position:fixed;
+            margin:auto;
+            left:0;
+            top:0;
+            right:0;
+            bottom:0;
+            height:200px;
+            width:400px;
+            border:1px solid #aaa;
+        }
+        #head{
+            width:100%;
+            height:50px;
+            background:#ddd;
+            text-align:center;
+            line-height:50px;
+            font-family:kaiti;
+            font-size:25px;
+
+        }
+        #body{
+            background:#fff;
+            border-top:1px solid #aaa;
+            width:100%;
+            height:150px;
+        }
+        #body p{
+            font-family:kaiti;
+            font-size:25px;
+            text-align:center;
+        }
+        .bt{
+            width:80px;
+            height:40px;
+            float:right;
+            margin:20px;
+        }
+    </style>
+</head>
+<body>
+<div id="part1">
+    <button id="tk">弹框</button>
+</div>
+<div id="part2">
+    <div id="head">这是一个浮出层</div>
+    <div id="body">
+        <p>这是一个浮出层</p>
+        <button id="cancel" class="bt">取消</button>
+        <button id="sure" class="bt">确定</button>
+
+    </div>
+</div>
+<script>
+    var tk=document.getElementById("tk");
+    var part2=document.getElementById("part2");
+    var body=document.getElementsByTagName("body");
+
+    tk.onclick=function(){
+        part2.style.display="block";
+        body[0].style.background="#999";
+    }
+</script>
+</body>
+</html>

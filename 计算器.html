@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html,body{
+            height:100%;
+            width:100%;
+            background-color:#56351E;
+        }
+        h1{
+            font-family:"Oleo Script",cursive;
+            margin-top:10px;
+            color:#F19953;
+        }
+        .calculator{
+            text-align: center;
+        }
+        table{
+            margin:15px auto;
+            font-size:22px;
+            border:5px outset orange;
+
+        }
+        #tab-1,#tab-2,#tab-3{
+            border:3px outset rgba(15,1,10,0.3);
+        }
+        input{
+            outline:none;
+            box-shadow:5px 5px 2px rgba(100,100,100,0.8) inset;
+        }
+        button{
+            width:60px;
+            height:40px;
+            border-radius:5px;
+            background:#fff;
+            box-shadow:3px 3px 2px rgba(100,10,10,0.8) inset;
+        }
+        #txtnum{
+            text-align:right;
+            height:50px;
+            width:100%;
+            background:#fff;
+            font-size:22px;
+        }
+        td{
+            padding:5px;
+            background:#ccc;
+        }
+    </style>
+</head>
+<body>
+<div class="calculator">
+    <h1>Calculator of wangda</h1>
+    <table cellspacing="0">
+        <tr>
+            <td colspan="2"><input type="text" id="txtnum" value="0"/></td>
+            <td style="text-align:center;padding:5px auto">
+                <button value="清除">清除</button>
+                <button value="退格">退格</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table id="tab-1">
+                    <tr>
+                        <td><button class="button" value="sin">sin</button></td>
+                        <td><button class="button" value="cos">cos</button></td>
+                        <td><button class="button" value="tan">tan</button></td>
+                    </tr>
+                    <tr>
+                        <td><button class="button" value="asin">asin</button></td>
+                        <td><button class="button" value="acos">acos</button></td>
+                        <td><button class="button" value="atan">atan</button></td>
+                    </tr>
+                    <tr>
+                        <td><button class="button" value="PI">PI</button></td>
+                        <td><button class="button" value="1/x">1/x</button></td>
+                        <td><button class="button" value="exp">exp</button></td>
+                    </tr>
+                    <tr>
+                        <td><button class="button" value="Inx">Inx</button></td>
+                        <td><button class="button" value="Igx">Igx</button></td>
+                        <td><button class="button" value="n!">n!</button></td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <table id="tab-2">
+                    <tr>
+                        <td><button class="button" value="7">7</button></td>
+                        <td><button class="button" value="8">8</button></td>
+                        <td><button class="button" value="9">9</button></td>
+                    </tr>
+                    <tr>
+                        <td><button class="button" value="4">4</button></td>
+                        <td><button class="button" value="5">5</button></td>
+                        <td><button class="button" value="6">6</button></td>
+                    </tr>
+                    <tr>
+                        <td><button class="button" value="1">1</button></td>
+                        <td><button class="button" value="2">2</button></td>
+                        <td><button class="button" value="3">3</button></td>
+                    </tr>
+                    <tr>
+                        <td><button class="button" value="0">0</button></td>
+                        <td><button class="button" value=".">.</button></td>
+                        <td><button class="button" value="=">=</button></td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <table id="tab-3">
+                    <tr>
+                        <td><button class="button" value="+">+</button></td>
+                        <td><button class="button" value="取整">取整</button></td>
+                    </tr>
+                    <tr>
+                        <td><button class="button" value="-">-</button></td>
+                        <td><button class="button" value="%">%</button></td>
+                    </tr>
+                    <tr>
+                        <td><button class="button" value="*">*</button></td>
+                        <td><button class="button" value="x^y">x^y</button></td>
+                    </tr>
+                    <tr>
+                        <td><button class="button" value="/">/</button></td>
+                        <td><button class="button" value="+/-">+/-</button></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<script>
+    var ans="";
+    var clear=false;
+    var calc="";
+    $(document).ready(function(){
+        $("button").click(function(){
+            var text=$(this).attr("value");
+            if(parseInt(text, 10)==text||text==="."||text==="/"||text==="*"||text==="-"||text==="+"||text==="%"){
+                if(clear===false){
+                    calc += text;
+                    $("#txtnum").val(calc);
+                }else{
+                    calc=text;
+                    $("#txtnum").val(calc);
+                    clear=false;
+                }
+            }else if(text==="清除"){
+                calc="";
+                $("#txtnum").val("");
+            }else if(text==="退格"){
+                calc=calc.slice(0,calc.length-1);
+                $("#txtnum").val(calc);
+            }else if(text==="="){
+                ans=eval(calc);
+                $("#txtnum").val(ans);
+                clear=true;
+            }
+            else if(text==="sin"||text==="cos"||text==="tan"||text==="asin"||text==="acos"||text==="atan"||text==="PI"||text==="1/x"||text==="exp"||text==="Inx"||text==="Igx"||text==="n!"){
+                with(Math){
+                    switch(text){
+                        case 'sin':calc=sin(calc);break;
+                        case 'cos':calc=cos(calc);break;
+                        case 'tan':calc=tan(calc);break;
+                        case 'asin':calc=asin(calc);break;
+                        case 'acos':calc=acos(calc);break;
+                        case 'atan':calc=atan(calc);break;
+                        case 'PI':calc=PI;break;
+                        case '1/x':calc=1/onum;break;
+                        case 'exp':calc=exp(calc);break;
+                        case 'lnx':calc=log(calc);break;
+                        case 'lgx':calc=log(calc)/log(10);break;
+                        case 'i':calc=floor(calc);break;
+                        case 'n!':calc=jc(calc);break;
+
+                    }
+                }
+                $("#txtnum").val(calc);
+            }
+        })
+        function jc(a){
+            if(a==1){
+                return 1;
+            }
+            else {
+                return jc(a-1)*a;
+            }
+        }
+    })
+
+</script>
+
+</body>
+</html>
